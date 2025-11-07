@@ -2,6 +2,7 @@ install:
 	pip install --upgrade pip && pip install -r requirements.txt
 
 format:
+	pip install black
 	black *.py
 
 train:
