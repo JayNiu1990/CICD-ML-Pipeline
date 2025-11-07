@@ -1,14 +1,10 @@
-import ipynbname
 import os
-# Get the full path of the notebook file
-notebook_file = ipynbname.path()
-notebook_folder = notebook_file.parent
-
-os.chdir(notebook_folder)
 print(os.getcwd())
-data_path = os.path.join("..", "Data", "drug200.csv")
-drug_df = pd.read_csv(data_path)
+
+import pandas as pd
+drug_df = pd.read_csv('Data/drug200.csv')
 drug_df = drug_df.sample(frac=1)
+drug_df.head(3)
 
 from sklearn.model_selection import train_test_split
 
@@ -51,7 +47,7 @@ f1 = f1_score(y_test, predictions, average="macro")
 
 print("Accuracy:", str(round(accuracy, 2) * 100) + "%", "F1:", round(f1, 2))
 
-with open("metrics.txt", "w") as outfile:
+with open("./Results/metrics.txt", "w") as outfile:
     outfile.write(f"\nAccuracy = {round(accuracy, 2)}, F1 Score = {round(f1, 2)}.")
 
 import matplotlib.pyplot as plt
@@ -60,12 +56,10 @@ from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 cm = confusion_matrix(y_test, predictions, labels=pipe.classes_)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=pipe.classes_)
 disp.plot()
-plt.savefig("model_results.png", dpi=120)
-
+plt.savefig("Results/model_results.png", dpi=120)
 
 from skops.io import dump, load, get_untrusted_types
-data_path = os.path.join("..", "Model", "pipeline.skops")
-dump(pipe, data_path)
+dump(pipe, 'Model/pipeline.skops')
 
-unknown_types = get_untrusted_types(file=os.path.join("..", "Model", "pipeline.skops"))
-loaded = load(data_path, trusted=unknown_types)
+unknown_types = get_untrusted_types(file='Model/pipeline.skops')
+loaded = load('Model/pipeline.skops', trusted=unknown_types)
