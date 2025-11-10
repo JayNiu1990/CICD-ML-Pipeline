@@ -24,7 +24,8 @@ update-branch:
 	git commit -m "Update with new results" || echo "No changes to commit."
 	git push --force origin update
 hf-login:
-	git pull origin update
+	git fetch origin update
+	git merge origin/update --no-edit || true
 	git switch update
 	pip install -U "huggingface_hub[cli]"
 	huggingface-cli login --token $(HF) --add-to-git-credential
