@@ -30,8 +30,8 @@ hf-login:
 	pip install -U "huggingface_hub[cli]"
 	hf auth login --token $(HF) --add-to-git-credential
 push-hub:
-	hf upload kingabzpro/Drug-Classification ./App --repo-type=space --commit-message="Sync App files"
-	hf upload kingabzpro/Drug-Classification ./Model /Model --repo-type=space --commit-message="Sync Model"
-	hf upload kingabzpro/Drug-Classification ./Results /Metrics --repo-type=space --commit-message="Sync Model"
+	hf upload YufuNiu/ML Pipeline ./App --repo-type=space --commit-message="Sync App files"
+	hf upload YufuNiu/ML Pipeline ./Model /Model --repo-type=space --commit-message="Sync Model"
+	hf upload YufuNiu/ML Pipeline ./Results /Metrics --repo-type=space --commit-message="Sync Model"
 
 deploy: hf-login push-hub
