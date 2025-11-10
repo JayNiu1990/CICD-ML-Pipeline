@@ -19,10 +19,12 @@ eval:
 update-branch:
 	git config --global user.name "yufu_niu"
 	git config --global user.email "yufu.niu@gmail.com"
-	git checkout -B update
-	git add app.py Results/ report.md || echo "No results to add."
+	git fetch origin update
+	git checkout -B update origin/update || git checkout -b update
+	git checkout main -- app.py
+	git add app.py
 	git commit -m "Update with new results" || echo "No changes to commit."
-	git push --force origin update
+	git push https://$(GH_PAT)@github.com/JayNiu1990/CICD-ML-Pipeline.git update
 hf-login:
 	git fetch origin update
 	git merge origin/update --no-edit || true
