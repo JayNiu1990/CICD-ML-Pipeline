@@ -20,7 +20,6 @@ update-branch:
 	git config --global user.name "yufu_niu"
 	git config --global user.email "yufu.niu@gmail.com"
 	git checkout -B update
-	git checkout main -- app.py
 	git add Results/ report.md app.py|| echo "No results to add."
 	git commit -m "Update with new results" || echo "No changes to commit."
 	git push --force origin update
