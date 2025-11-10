@@ -27,6 +27,9 @@ hf-login:
 	git fetch origin update
 	git merge origin/update --no-edit || true
 	git switch update
+	git checkout main -- app.py
+	git add app.py
+	git push origin update
 	pip install -U "huggingface_hub[cli]"
 	hf auth login --token $(HF) --add-to-git-credential
 push-hub:
